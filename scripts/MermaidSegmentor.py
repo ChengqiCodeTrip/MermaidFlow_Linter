@@ -19,7 +19,7 @@ def extract_pattern(config_path: Path):
     # Create a dictionary mapping type_name to its regex pattern
     pattern_for_each_segment = {}
     for segment in segment_config:
-        type_name = segment.get("type_name")
+        type_name = segment.get("line_type_name")
         pattern = segment.get("pattern")
         if type_name and pattern:
             # Compile the regex pattern for better performance

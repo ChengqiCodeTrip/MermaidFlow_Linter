@@ -5,11 +5,13 @@ This is a cheker for finding the violation of new generated Mermaid Code.
 In this repo, we will use __regex__ for analysing Mermaid code directly.
 
 # TODO list:
-- [ ] reading through the hard compiler passed Mermaid code (.mmd file) to locate each parts
-    - [ ] node define part
-    - [ ] type define part
-    - [ ] node type assignment part
-    - [ ] edge connection part
+- [x] reading through the hard compiler passed Mermaid code (.mmd file) to locate each parts
+    - [x] node define part
+    - [x] type define part
+    - [x] node type assignment part
+    - [x] edge connection part
+    - [x] comments part
+    - [x] empty part (doesn't have any content)
 
 - [ ] read through __type__ definition to check the connection correctness
     - [ ] define type by config file (written by json)

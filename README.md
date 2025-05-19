@@ -13,11 +13,13 @@ In this repo, we will use __regex__ for analysing Mermaid code directly.
     - [x] comments part
     - [x] empty part (doesn't have any content)
 
-- [ ] read through __type__ definition to check the connection correctness
-    - [ ] define type by config file (written by json)
-    - [ ] read through the edge connection part to verify the connection correctness
-        - [ ] W1: lack necessary input (W1 <-> Wrong 1)
-        - [ ] W2: lack necessary output
-    - [ ] it doesn't have hang over nodes in the graph
+- [x] read through __type__ definition to check the connection correctness
+    - [x] define type by config file (written by json)
+    - [x] read through the edge connection part to verify the connection correctness
+        - [x] W1: check for PROBLEM and RETURN nodes existence
+        - [x] W2: ensure all nodes have path to connect to both PROBLEM and RETURN
+        - [x] W3: verify PROBLEM and RETURN nodes are of Interface class type
+        - [x] W4: validate all nodes have legal node types from configuration
+        - [x] W5: ensure ScEnSembleOp nodes have at least 2 incoming connections
 
 > Those are the main mistake in our generated Mermaid workflow. Even though it can pass compiler by Mermaic, since it doesn't violate any grammer of Mermaid, but it still may not fully obey our setting of workflow which would mislead the python code.

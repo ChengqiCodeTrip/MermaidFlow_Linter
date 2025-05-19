@@ -120,7 +120,8 @@ class MermaidCheker():
             self.W1_contain_problem_and_return_node,
             self.W2_node_connection,
             self.W3_interface_check,
-            self.W4_violate_node_type
+            self.W4_violate_node_type,
+            self.W5_ensemble_violation
         ]
         
         all_violations = []
@@ -195,3 +196,13 @@ class MermaidCheker():
         
         return violations
     
+    def W5_ensemble_violation(self, graph: nx.DiGraph, node_class, node_connection_info):
+        violations = []
+        
+        for node, node_type in node_class.items():
+            if node_type == "ScEnSembleOp":
+                incoming = list(graph.predecessors(node))
+                if len(incoming) < 2:
+                    violations.append(f"W5: ScEnSembleOp node '{node}' must have at least 2 incoming connections, but only has {len(incoming)}. Ensemble operations require multiple inputs to function properly.")
+        
+        return violations

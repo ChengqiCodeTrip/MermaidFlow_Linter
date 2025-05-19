@@ -18,5 +18,6 @@ In this repo, we will use __regex__ for analysing Mermaid code directly.
     - [ ] read through the edge connection part to verify the connection correctness
         - [ ] W1: lack necessary input (W1 <-> Wrong 1)
         - [ ] W2: lack necessary output
+    - [ ] it doesn't have hang over nodes in the graph
 
 > Those are the main mistake in our generated Mermaid workflow. Even though it can pass compiler by Mermaic, since it doesn't violate any grammer of Mermaid, but it still may not fully obey our setting of workflow which would mislead the python code.

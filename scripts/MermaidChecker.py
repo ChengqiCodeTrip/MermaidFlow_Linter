@@ -127,7 +127,7 @@ class MermaidCheker():
             
             # Build the command to run mermaid CLI
             # Assuming mmdc (mermaid-cli) is installed
-            cmd = f"mmdc -i {file_path}"
+            cmd = ["mmdc", "-i", str(file_path)]
             
             # Execute the command
             process = subprocess.Popen(

@@ -1,5 +1,8 @@
 from collections import defaultdict
 import json
+import time
+import tempfile
+import os
 from pathlib import Path
 from scripts.MermaidSegmentor import MermaidSegmentor
 from pydantic import BaseModel, Field
@@ -107,12 +110,40 @@ class MermaidCheker():
         node_connections_info = self.extract_node_connection_map(segmentation)
         return node_class, node_connections_info
 
-    def __call__(self, file_path: Path): 
+    def soft_check(self, file_path: Path): 
         self.node_class, self.node_connection_info = self.extract_nodes_and_connections(file_path)
         self.graph = self.create_graph(self.node_connection_info)
         is_pass_all = self.detect_the_graph(self.graph, self.node_class, self.node_connection_info)
 
+        return len(is_pass_all) == 0
+    
+    def hard_check(self, file_path: Path):
+        # test by Mermaid compiler
         ...
+    
+    def transfer_mmd_code_string_to_temp_file(self, mmd_code: str):
+        temp_path = None
+
+        temp_dir = Path("~/.temp").expanduser()
+        
+        try:
+            # Create temp directory if it doesn't exist
+            os.makedirs(temp_dir, exist_ok=True)
+            
+            # Create a temporary file in the specified directory
+            temp_file_name = f"mermaid_{int(time.time())}.mmd"
+            temp_path = temp_dir / temp_file_name
+            
+            # Write mermaid code to the temporary file
+            with open(temp_path, 'w') as temp_file:
+                temp_file.write(mmd_code)
+            
+            return temp_path
+            
+        except Exception as e:
+            print(f"Error processing Mermaid code: {e}")
+            return temp_path
+        
 
     def detect_the_graph(self, graph, node_class, node_connection_info):
         # List of all validation functions to run on the graph
@@ -136,10 +167,10 @@ class MermaidCheker():
             print("The following violations were detected in the graph:")
             for i, violation in enumerate(all_violations, 1):
                 print(f"{i}. {violation}")
-            return False
+            return all_violations
         
         print("All validations passed successfully!")
-        return True
+        return all_violations
 
     def W1_contain_problem_and_return_node(self, graph, node_class, node_connection_info):
         """Check if the graph contains both PROBLEM and RETURN nodes"""

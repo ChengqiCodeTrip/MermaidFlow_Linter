@@ -5,7 +5,7 @@ import tempfile
 import subprocess
 import os
 from pathlib import Path
-from scripts.MermaidSegmentor import MermaidSegmentor
+from .MermaidSegmentor import MermaidSegmentor
 from pydantic import BaseModel, Field
 import regex as re
 import networkx as nx

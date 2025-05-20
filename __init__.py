@@ -1,7 +1,7 @@
 # MermaidFlow_Linter package initialization
 # This package provides tools for linting and validating Mermaid flowchart diagrams
 
-from scripts.MermaidChecker import MermaidCheker, ConfigCls, OperatorInfo, SegmentParts, ConnectionInfo
+from .scripts.MermaidChecker import MermaidCheker, ConfigCls, OperatorInfo, SegmentParts, ConnectionInfo
 from pathlib import Path
 
 __version__ = "0.1.0"

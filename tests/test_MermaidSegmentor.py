@@ -11,7 +11,7 @@ flowchart TD
     C3["Custom<br/>(role: alternative_solver)"]
     C4["Custom<br/>(role: detailed_solution_outline)"]
     C5["Custom<br/>(role: comprehensive_solution]"]
-    P["Programmer<br/>(analysis: 'Solve the math problem step by step')"]
+    P["Programmer<br/>(analysis: 'Solve the math problem step by step')]
     REFINE["Custom<br/>(role: refine_solution)"]
     ENSEMBLE["ScEnsemble<br/>"]
     RETURN([Return response & cost])

@@ -121,40 +121,37 @@ class MermaidCheker():
     def hard_check(self, file_path: Path):
         # Test by Mermaid compiler
         # This function runs the mermaid CLI to validate the diagram
+        # Create a temporary output file for the compilation result
+        output_file = file_path.with_suffix('.png')
+        error_file_path = f"{str(file_path)}.temp_error.txt"
+        
+        # Build the command to run mermaid CLI
+        # Assuming mmdc (mermaid-cli) is installed
+        cmd = ["mmdc", "-i", str(file_path), "-o", str(output_file)]
+        
         try:
-            # Create a temporary output file for the compilation result
-            output_file = file_path.with_suffix('.png')
+            # Execute the mermaid CLI command
+            cmd_str = " ".join(cmd)
+            exit_code = os.system(cmd_str + f" 2> {error_file_path}")
             
-            # Build the command to run mermaid CLI
-            # Assuming mmdc (mermaid-cli) is installed
-            cmd = ["mmdc", "-i", str(file_path)]
-            
-            # Execute the command
-            process = subprocess.Popen(
-                cmd,
-                shell=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-            
-            # Get output and error messages
-            stdout, stderr = process.communicate()
-            
-            # Check if compilation was successful
-            if process.returncode == 0:
-                info = f"Mermaid compilation successful: {file_path}"
-                # Remove the temporary output file
-                if output_file.exists():
-                    os.remove(output_file)
-                return True, info
+            # Check if the command was successful (0 means success)
+            if exit_code == 0:
+                return True, "This Mermaid code passes the hard test"
             else:
-                info = f"Mermaid compilation failed: {stderr}"
-                return False, info
+                # Read error message from temporary file
+                error_msg = ""
+                try:
+                    with open(error_file_path, "r") as error_file:
+                        error_msg = error_file.read().strip()
+                    os.remove("temp_error.txt")
+                except:
+                    error_msg = "Unknown error"
                 
+                return False, f"Mermaid compilation failed: {error_msg}"
         except Exception as e:
-            info = f"Error during Mermaid compilation: {e}"
-            return False, info
+            # Handle any exceptions that might occur
+            return False, f"Error running Mermaid compiler: {str(e)}"
+                
     
     def transfer_mmd_code_string_to_temp_file(self, mmd_code: str):
         temp_path = None

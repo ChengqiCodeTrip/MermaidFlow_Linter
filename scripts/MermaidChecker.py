@@ -2,6 +2,7 @@ from collections import defaultdict
 import json
 import time
 import tempfile
+import subprocess
 import os
 from pathlib import Path
 from scripts.MermaidSegmentor import MermaidSegmentor
@@ -118,8 +119,42 @@ class MermaidCheker():
         return len(is_pass_all) == 0
     
     def hard_check(self, file_path: Path):
-        # test by Mermaid compiler
-        ...
+        # Test by Mermaid compiler
+        # This function runs the mermaid CLI to validate the diagram
+        try:
+            # Create a temporary output file for the compilation result
+            output_file = file_path.with_suffix('.png')
+            
+            # Build the command to run mermaid CLI
+            # Assuming mmdc (mermaid-cli) is installed
+            cmd = f"mmdc -i {file_path}"
+            
+            # Execute the command
+            process = subprocess.Popen(
+                cmd,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            
+            # Get output and error messages
+            stdout, stderr = process.communicate()
+            
+            # Check if compilation was successful
+            if process.returncode == 0:
+                info = f"Mermaid compilation successful: {file_path}"
+                # Remove the temporary output file
+                if output_file.exists():
+                    os.remove(output_file)
+                return True, info
+            else:
+                info = f"Mermaid compilation failed: {stderr}"
+                return False, info
+                
+        except Exception as e:
+            info = f"Error during Mermaid compilation: {e}"
+            return False, info
     
     def transfer_mmd_code_string_to_temp_file(self, mmd_code: str):
         temp_path = None

@@ -54,7 +54,6 @@ flowchart TD
 def test_read_line():
     from scripts.MermaidSegmentor import MermaidSegmentor
 
-    
     segmentor = MermaidSegmentor(config=segment_define)
     segmentor(mmd_path)
 
@@ -78,6 +77,18 @@ def test_using_mermaid_code():
     mermaid_path = mermaid_checker.transfer_mmd_code_string_to_temp_file(mermaid_code)
 
     output = mermaid_checker.soft_check(mermaid_path)
+
+def test_hard_check():
+    from scripts.MermaidChecker import ConfigCls, MermaidCheker
+    confg_file = ConfigCls(segmentor_config=segment_define, checker_config=checker_config)
+
+    mermaid_checker = MermaidCheker(
+        config=confg_file
+    )
+    mermaid_path = mermaid_checker.transfer_mmd_code_string_to_temp_file(mermaid_code)
+
+    output = mermaid_checker.hard_check(mermaid_path)
+    
 
 def test_defined_rules_for_custom():
     ...

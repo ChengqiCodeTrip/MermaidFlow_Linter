@@ -1,0 +1,30 @@
+[
+    {
+        "line_type_name": "head",
+        "pattern": "^flowchart\\s+TD$"
+    },
+    {
+        "line_type_name": "nodes_initialization",
+        "pattern": "^\\s*\\w+(?:\\(\\[.*?\\]\\)|\\[\".*?\"\\])$"
+    },
+    {
+        "line_type_name": "class_definition",
+        "pattern": "^\\s*classDef\\s+\\w+\\s+.*$"
+    },
+    {
+        "line_type_name": "nodes_assignment",
+        "pattern": "^\\s*class\\s+\\w+\\s+\\w+$"
+    },
+    {
+        "line_type_name": "nodes_connections",
+        "pattern": "^\\s*\\w+\\s*-->\\s*(?:\\|.*?\\|)?\\s*\\w+$"
+    },
+    {
+        "line_type_name": "comments",
+        "pattern": "^\\s*%%.*$"
+    },
+    {
+        "line_type_name": "empty",
+        "pattern": "^\\s*$" 
+    }
+]

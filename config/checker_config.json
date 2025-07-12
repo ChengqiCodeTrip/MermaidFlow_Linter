@@ -1,0 +1,22 @@
+[
+    {
+        "node_type": "CustomOp",
+        "description": "...",
+        "required_connections": {}
+    },
+    {
+        "node_type": "ProgrammerOp",
+        "description": "...",
+        "required_connections": {}
+    },
+    {
+        "node_type": "ScEnSembleOp",
+        "description": "...",
+        "required_connections": {}
+    },
+    {
+        "node_type": "Interface",
+        "description": "...",
+        "required_connections": {}
+    }
+]

@@ -15,6 +15,16 @@
         "required_connections": {}
     },
     {
+        "node_type": "CustomCodeGenerateOp",
+        "description": "...",
+        "required_connections": {}
+    },
+    {
+        "node_type": "TestOp",
+        "description": "...",
+        "required_connections": {}
+    },
+    {
         "node_type": "Interface",
         "description": "...",
         "required_connections": {}

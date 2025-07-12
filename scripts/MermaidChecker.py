@@ -116,7 +116,7 @@ class MermaidCheker():
         self.graph = self.create_graph(self.node_connection_info)
         is_pass_all = self.detect_the_graph(self.graph, self.node_class, self.node_connection_info)
 
-        return len(is_pass_all) == 0, "\n".join(is_pass_all)
+        return len(is_pass_all) == 0, "\n".join(is_pass_all) if len(is_pass_all) != 0 else "This Mermaid code passes the soft test"
     
     def hard_check(self, file_path: Path):
         # Test by Mermaid compiler

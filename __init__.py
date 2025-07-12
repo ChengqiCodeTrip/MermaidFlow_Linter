@@ -5,7 +5,7 @@ from .scripts.MermaidChecker import MermaidCheker, ConfigCls, OperatorInfo, Segm
 from pathlib import Path
 
 __version__ = "0.1.0"
-__author__ = "Issac"
+__author__ = "Chengqi"
 __all__ = ["MermaidCheker", "ConfigCls", "OperatorInfo", "SegmentParts", "ConnectionInfo"]
 
 # Default configuration paths
